@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import {AppState, AsyncStorage} from 'react-native';
+import { AppState, AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import ReduxThunk from 'redux-thunk';
+import firebase from 'firebase';
 import Router from './Router';
 import reducers from './reducers';
-import firebase from 'firebase';
+
+
+const store = createStore(
+  reducers, {},
+  compose(
+    applyMiddleware(ReduxThunk),
+    autoRehydrate()
+  )
+);
 
 class App extends Component {
 
@@ -19,13 +29,11 @@ class App extends Component {
       messagingSenderId: "711721693663"
     };
 
+    firebase.database.enableLogging(true);
     firebase.initializeApp(config);
   }
 
-
   render() {
-
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
     return(
       <Provider store={store} >
