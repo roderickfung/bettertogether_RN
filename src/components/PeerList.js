@@ -4,7 +4,8 @@ import { Header, Container, Content, Body, Footer, FooterTab, List, ListItem, Le
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { getUsers, logout } from '../actions';
-
+import cstyle from '../assets/StyleGuide';
+import { Actions } from 'react-native-router-flux';
 
 let counter = 0;
 
@@ -26,7 +27,7 @@ class PeerList extends Component {
   }
 
   onSelectPress() {
-
+    Actions.sp()
   }
 
   onButtonPress() {
@@ -36,21 +37,14 @@ class PeerList extends Component {
   render() {
 
     return(
-      <Container>
+      <Container style={ cstyle.container }>
         <Header />
-        <Content>
+        <Content style={ cstyle.content}>
           {
             this.props.users.map( (user) => {
               return(
-                <ListItem last key={user.id} >
-                  <Left>
-                    <Text style={{ fontSize: 12 }}> { user.id }</Text>
-                  </Left>
-                  <Right>
-                    <Button onPress={ this.onSelectPress.bind(this) } style={ styles.btn }>
-                      <Text style={styles.btnText} > Talk </Text>
-                    </Button>
-                  </Right>
+                <ListItem last key={ user.id } onPress={ this.onSelectPress.bind(this) } >
+                  <Text style={{ fontSize: 12 }}> { user.email }</Text>
                 </ListItem>
               )
             })
@@ -58,23 +52,13 @@ class PeerList extends Component {
         </Content>
         <Footer>
           <FooterTab>
-            <Button full onPress={ this.onButtonPress.bind(this) } style={styles.btn}>
-              <Text style={ styles.btnText }> Sign Out </Text>
+            <Button full onPress={ this.onButtonPress.bind(this) } style={cstyle.lstbtn}>
+              <Text style={ cstyle.btnText }> Sign Out </Text>
             </Button>
           </FooterTab>
         </Footer>
       </Container>
     );
-  }
-}
-
-let styles = {
-  btn:{
-    backgroundColor: '#D25D62',
-    borderRadius: 0
-  },
-  btnText: {
-    color: '#FFF'
   }
 }
 

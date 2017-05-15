@@ -8,4 +8,6 @@ import {
 } from './types';
 import firebase from 'firebase';
 
-export const findRoom = ()
+export const findRoom = ({ me, friend}) => {
+
+}
