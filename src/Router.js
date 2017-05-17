@@ -28,7 +28,7 @@ const RouterComponent = ( ) => {
           component={ PeerChat }
           navigationBarStyle={ styles.navbar }
           titleStyle={styles.title}
-          barButtonTextStyle:{ color:'#FFFFFF'},
+          barButtonTextStyle={{color:'#FFFFFF'}}
 
         />
       </Scene>
